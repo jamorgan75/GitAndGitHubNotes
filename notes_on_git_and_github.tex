@@ -1,0 +1,353 @@
+\documentclass[12pt]{article}
+\usepackage{mathtools,amssymb}
+\usepackage[margin=.65in]{geometry}
+\pagestyle{empty}
+\everymath{\displaystyle}
+\usepackage{tabularx,ragged2e,booktabs,caption}
+\usepackage{upquote}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+\usepackage{fancyvrb}
+\fvset{xleftmargin=10mm}
+
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{mathptmx} %Times math and text font
+\usepackage{helvet}
+\usepackage{mathastext}
+
+
+
+
+
+
+% groovy underlining
+\usepackage[normalem]{ulem}
+\usepackage{contour}
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+
+
+% custom commands, envirnments, lists and column types
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % P{30mm} creates a centered paragraph column in tabular
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % L{30mm} creates a left-justified, raggedright fixed column that allows manualr line breaks
+
+\usepackage{titleps} % alternative to fncyhdr
+\newpagestyle{main}{%
+  \setheadrule{0pt} %
+  \sethead[][][]{}{}{}% \sethead{<left>}{<centre>}{<right>}
+  \setfoot[][][]{}{}{}% \setfoot{<left>}{<centre>}{<right>}
+}
+\pagestyle{main}
+
+
+
+
+
+
+
+\begin{document}
+\raggedright
+
+
+
+
+\renewcommand{\ULdepth}{2.8pt}
+\renewcommand{\ULthickness}{1.8pt}
+
+\myuline{\makebox[\textwidth][l]{\LARGE Git and GitHub Notes}}\par\medskip
+Fall 2022\par
+These notes are written for using Git and GitHub on Linux Mint.\par
+Token:  \verb|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| good until November 3ish, 2022\\
+\hrulefill
+
+
+RESOURCES
+\begin{itemize}
+\item Notes take from Kevin Stravert: \href{https://www.youtube.com/watch?v=tRZGeaHPoaw}{https://www.youtube.com/watch?v=tRZGeaHPoaw}
+\item Official Git web site: \href{https://www.git-scm.com/}{https://www.git-scm.com/}
+\item Official GitHub.com web site: \href{https://github.com/}{https://github.com/}
+\item Git and GitHub.com cheat sheet: \href{https://education.github.com/git-cheat-sheet-education.pdf}{https://education.github.com/git-cheat-sheet-education.pdf}
+\item Git Reference Manual: \href{https://git-scm.com/docs}{https://git-scm.com/docs}
+\item Git Overview Book: \href{https://git-scm.com/book/en/v2}{https://git-scm.com/book/en/v2}
+\item Sample ignore files: \href{https://github.com/github/gitignore}{https://github.com/github/gitignore}
+\item Hyper.is Terminal: \href{https://hyper.is/}{https://hyper.is/}
+\end{itemize}
+
+
+
+\newpage
+
+
+
+\section{Get Git}
+Determine if you have Git installed. Type \verb|git --version| in terminal and press Enter.\par
+If \verb|Command 'git' is not found|, install with the following:
+\begin{Verbatim}
+sudo apt install git
+\end{Verbatim}
+
+
+\section{Configure Git}
+Specify your name:
+\begin{Verbatim}
+git config --global user.name "James Morgan"
+\end{Verbatim}
+Specify your email address:
+\begin{Verbatim}
+git config --global user.email jamorgan75@protonmail.com
+\end{Verbatim}
+Set default branch name to ``main":
+\begin{Verbatim}
+git config --global init.default branch main
+\end{Verbatim}
+
+\section{Get help}
+
+\section{Initialize Repository}
+Within terminal, change directory to the folder for which you wish to create a repository. Type the following and the press Enter:
+\begin{Verbatim}
+git init
+\end{Verbatim}
+This creates a hidden folder \verb|.git| within the directory that contains the repository files.\par
+
+
+
+
+
+
+\newpage
+
+
+
+
+
+
+\section{Git status}
+We can find the status of our repository with the following command:
+\begin{Verbatim}
+git status
+\end{Verbatim}
+This command will return the following information:
+\begin{itemize}[nosep]
+\item branch name
+\item
+\item tracked (green) or untracked (red) files
+\end{itemize}
+
+\section{Track and untrack files}
+To track a file:
+\begin{Verbatim}
+git add index.htm
+\end{Verbatim}
+To untrack (unstage) a file:
+\begin{Verbatim}
+git rm --cached index.htm
+git add notes_on_git_and_github.tex
+\end{Verbatim}
+To untrack (unstage) a file:
+\begin{Verbatim}
+git rm --cached notes_on_git_and_github.tex
+\end{Verbatim}
+
+
+\section{Ignore files with {\ttfamily .gitignore}}
+Create a \verb|.txt| file in the directory and add the filetype. Comment with the hashtag symbol.
+\begin{Verbatim}[frame=single]
+# ignore all .txt files
+*.txt
+\end{Verbatim}
+Ignoring files is useful if you have files with sensitive information within the directory.\par
+To see a comprehensive list of all the ways to ignore files, visit \href{https://github.com/github/gitignore}{https://github.com/github/gitignore}
+
+\section{Track all files / add to staging}
+To track all files within the directory, use one of the following:
+\begin{Verbatim}
+git add --all
+git add -A
+git add .
+\end{Verbatim}
+
+
+\section{Commit}
+To commit is to take a snap shot of what your repository looks like at this point in time.
+\begin{Verbatim}
+git commit -m "first commit - committing all fules to the repository"
+\end{Verbatim}
+
+\section{Change files and view differences}
+If we change and save a file, the file is now categorized as ``modified.''\par
+We can compare the differences in the modified file with the following command:
+\begin{Verbatim}
+git diff
+\end{Verbatim}
+The original text will be in red, and the changed text will be in green.\par
+We can now use the add command, and the file will be sitting in ``staging''.\par
+Within Git, we have three different environments: working files, staging, and commit.
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\node[draw,align=center,minimum height = 12mm, minimum width=30mm] (working) {WORKING\\FILES};
+\node[draw,align=center,minimum height = 12mm, minimum width=30mm,below = 5mm of working] (staging) {STAGING};
+\node[draw,align=center,minimum height = 12mm, minimum width=30mm,below = 5mm of staging] (commit) {COMMIT};
+\node[right = 5mm of working] {Files are edited here};
+\node[right = 5mm of staging] {Files are held to be committed};
+\node[right = 5mm of commit] {A record of change is created for a file};
+\end{tikzpicture}
+\end{figure}
+\par
+To remove files from staging:
+\begin{Verbatim}
+git restore --staged index.htm
+\end{Verbatim}
+If we commit now, the \verb|index.htm| file will not be included as it is in the working environment.
+
+
+\section{Bypass staging and commit}
+The following skips the staging steps:
+\begin{Verbatim}
+git commit -a -m "updated text to free range"
+\end{Verbatim}
+\section{Delete / remove files}
+\begin{Verbatim}
+git rm "secret recipe.htm"
+\end{Verbatim}
+If Git is tracking the deleted file, status will show that the file has been deleted.
+
+\section{Restore files}
+\begin{Verbatim}
+git restore "secret recipe.htm"
+\end{Verbatim}
+This recovers the file.
+
+\section{Rename files}
+\begin{Verbatim}
+git mv "KCC Logo.png" "Primary Logo.png"
+git commit -m "chagnnnged the file name of an image"
+\end{Verbatim}
+
+\section{View commit history with git log}
+\begin{Verbatim}
+git log
+\end{Verbatim}
+To get an abbreviated view:
+\begin{Verbatim}
+git log --oneline
+\end{Verbatim}
+
+\section{Amend commit}
+\begin{Verbatim}
+git commit -m "changed file name to Primary Logo.png" --amend
+\end{Verbatim}
+
+\section{View changes in commits}
+\begin{Verbatim}
+git log -p
+\end{Verbatim}
+To find the different capabilities of \verb|git log| is to use the help feature:
+\begin{Verbatim}
+git help log
+\end{Verbatim}
+
+
+\section{Reset to previous commit}
+To jump back to a previous commit:
+\begin{Verbatim}
+git reset c193894
+\end{Verbatim}
+
+\section{Rebase git repository}
+To modify your commits:
+\begin{Verbatim}
+git rebase -i --root
+\end{Verbatim}
+To exit this menu, press :X and then Enter.
+
+
+\section{Branches}
+To create a new branch, from the directory we enter:
+\begin{Verbatim}
+git branch FixTemp
+\end{Verbatim}
+To see branches, type:
+\begin{Verbatim}
+git branch
+\end{Verbatim}
+We are currently in the branch with the asterisk.\par
+To switch into another branch, we type:
+\begin{Verbatim}
+git switch FixTemp
+\end{Verbatim}
+Now any changes made to the files in the directory will be associated with the current branch. Our commits will be applied to that branch.\par
+Switching back to main,
+\begin{Verbatim}
+git switch main
+\end{Verbatim}
+our files in the directory no reflect the changes made in the FixTemp branch. To bring the changes to the main branch, we need to merge the changes in.
+
+\section{Merge branches}
+We will need to specify which branch we want to merge with main.
+\begin{Verbatim}
+git merge -m "Merge fixtemp back to main" FixTemp
+\end{Verbatim}
+
+\section{Delete branch}
+Now that we've merged the FixTemp branch with main, we no longer need the FixTemp branch.
+\begin{Verbatim}
+git branch -d FixTemp
+\end{Verbatim}
+
+\section{Merge conflicts}
+If changes in main are committed before a branch is merged, we will have a merge conflict.\par
+The following line will create a new branch and switch to that branch:
+\begin{Verbatim}
+git switch -c UpdateText
+\end{Verbatim}
+
+\section{Typical Git flow}
+You have some feature or bug to work on, so you create a new branch.
+\begin{enumerate}[nosep]
+\item Create new branch
+\item Make all changes
+\item Merge into main
+\item Delete branch that you were working on
+\end{enumerate}
+
+
+\section{Set up GitHub account}
+Your GitHub account can be created at \href{https://github.com/}{https://github.com/}
+
+\section{Create new cloud repository}
+On the left-hand side of the GitHub web page, you should see the option to create a new repository (a.k.a. repo). Alternatively,  you can visit \href{github.new}{github.new}, and this will drop you on the new repo page.\par
+
+Enter a name for the repo. If you make the repo private, you can assign different individuals access to the repo.
+
+\section{Push local repo to GitHub}
+\section{Working with files}
+\section{Edit repo details}
+\section{Issues}
+\section{Pull requests}
+\section{Actions, Projects, Wiki, Security, Insights, Settings}
+\section{Releases}
+\section{Fetch and pull}
+\section{Wrap up}
+
+
+
+
+
+\end{document}
+
+
+
+
