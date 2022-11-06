@@ -15,16 +15,10 @@
 \usepackage{fancyvrb}
 \fvset{xleftmargin=10mm}
 
-
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{mathptmx} %Times math and text font
 \usepackage{helvet}
 \usepackage{mathastext}
-
-
-
-
-
 
 % groovy underlining
 \usepackage[normalem]{ulem}
@@ -36,11 +30,10 @@
   \llap{\contour{white}{#1}}%
 }
 
-
-
 % custom commands, envirnments, lists and column types
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % P{30mm} creates a centered paragraph column in tabular
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % L{30mm} creates a left-justified, raggedright fixed column that allows manualr line breaks
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \usepackage{titleps} % alternative to fncyhdr
 \newpagestyle{main}{%
@@ -58,9 +51,6 @@
 
 \begin{document}
 \raggedright
-
-
-
 
 \renewcommand{\ULdepth}{2.8pt}
 \renewcommand{\ULthickness}{1.8pt}
