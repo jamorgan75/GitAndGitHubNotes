@@ -1,4 +1,5 @@
 \documentclass[12pt]{article}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{mathtools,amssymb}
 \usepackage[margin=.65in]{geometry}
 \pagestyle{empty}
@@ -55,13 +56,13 @@
 \renewcommand{\ULdepth}{2.8pt}
 \renewcommand{\ULthickness}{1.8pt}
 
-\myuline{\makebox[\textwidth][l]{\LARGE Git and GitHub Notes}}\par\medskip
+\myuline{\makebox[\textwidth][l]{\LARGE Git and GitHub Notes}}
 
-
-RESOURCES
-\begin{itemize}
+\vspace{-1ex}
+\subsection*{RESOURCES}
+\begin{itemize}[itemsep=-.5ex]
 \item Videos:
-\begin{itemize}
+\begin{itemize}[itemsep=-.5ex]
 \item Kevin Stravert: \href{https://www.youtube.com/watch?v=tRZGeaHPoaw}{https://www.youtube.com/watch?v=tRZGeaHPoaw}
 \item Gwen Faraday:
 \href{https://www.youtube.com/watch?v=-9Tb76tBoFU}{https://www.youtube.com/watch?v=-9Tb76tBoFU}
@@ -237,17 +238,20 @@ If we commit now, the \verb|index.htm| file will not be included as it is in the
 
 \begin{figure}[h!]
 \centering
-\begin{tikzpicture}[rounded corners,-{Stealth[length=6pt]}]
-\node[draw, align=center,minimum height = 12mm, minimum width=30mm] (working) {Working\\directory};
-\node[draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of working] (staging) {Staging\\index};
-\node[draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of staging] (local) {Local\\repository};
-\node[draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of local] (remote) {Remote\\repository};
+\begin{tikzpicture}[rounded corners,-{Stealth[length=6pt]},nodes={font=\footnotesize}]
+\node[fill=Bittersweet!25,draw, align=center,minimum height = 12mm, minimum width=30mm] (working) {Working\\directory};
+\node[fill=Bittersweet!50,draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of working] (staging) {Staging\\index};
+\node[fill=Bittersweet!75,draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of staging] (local) {Local\\repository};
+\node[fill=Bittersweet,draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of local] (remote) {Remote\\repository};
 
 \draw (working.130) --++ (90:22mm) -| (staging.150) node[pos=.05,anchor=south west]{add};
 \draw (staging.130) --++ (90:22mm) -| (local.150) node[pos=.05,anchor=south west]{commit};
 \draw (local.130) --++ (90:22mm) -| (remote.150) node[pos=.05,anchor=south west]{push};
 
-\draw (remote.230) --++ (270:22mm) -| (local.330) node[pos=.05,anchor=south east]{pull};
+\draw (remote.230) --++ (270:22mm) -| (local.310) node[pos=.05,anchor=south east]{pull};
+\draw (local.230) --++ (270:39mm) -| (working.310) node[pos=.05,anchor=south east]{reset};
+\draw (remote.230) --++ (270:59mm) -| (working.230) node[pos=.05,anchor=south east]{};
+\draw[-] (staging.230) --++ (270:22mm) -| (working.310);
 \end{tikzpicture}
 \end{figure}
 
