@@ -8,7 +8,7 @@
 \usepackage{enumitem}
 \usepackage{multirow}
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usetikzlibrary{positioning,arrows.meta}
 \usepackage{array}
 \usepackage{parskip}
 \usepackage[colorlinks=true, urlcolor=blue]{hyperref}
@@ -56,15 +56,16 @@
 \renewcommand{\ULthickness}{1.8pt}
 
 \myuline{\makebox[\textwidth][l]{\LARGE Git and GitHub Notes}}\par\medskip
-Fall 2022\par
-These notes are written for using Git and GitHub on Linux Mint.\par
-Token:  \verb|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| good until November 3ish, 2022\\
-\hrulefill
 
 
 RESOURCES
 \begin{itemize}
-\item Notes taken from Kevin Stravert: \href{https://www.youtube.com/watch?v=tRZGeaHPoaw}{https://www.youtube.com/watch?v=tRZGeaHPoaw}
+\item Videos:
+\begin{itemize}
+\item Kevin Stravert: \href{https://www.youtube.com/watch?v=tRZGeaHPoaw}{https://www.youtube.com/watch?v=tRZGeaHPoaw}
+\item Gwen Faraday:
+\href{https://www.youtube.com/watch?v=-9Tb76tBoFU}{https://www.youtube.com/watch?v=-9Tb76tBoFU}
+\end{itemize}
 \item Official Git web site: \href{https://www.git-scm.com/}{https://www.git-scm.com/}
 \item Official GitHub.com web site: \href{https://github.com/}{https://github.com/}
 \item Git and GitHub.com cheat sheet: \href{https://education.github.com/git-cheat-sheet-education.pdf}{https://education.github.com/git-cheat-sheet-education.pdf}
@@ -72,35 +73,42 @@ RESOURCES
 \item Git Overview Book: \href{https://git-scm.com/book/en/v2}{https://git-scm.com/book/en/v2}
 \item Sample ignore files: \href{https://github.com/github/gitignore}{https://github.com/github/gitignore}
 \item Hyper.is Terminal: \href{https://hyper.is/}{https://hyper.is/}
+\item A decent Git command reference: \href{https://dev.classmethod.jp/articles/git-bash-commands/}{https://dev.classmethod.jp/articles/git-bash-commands/}
 \end{itemize}
 
+\section{Install Git and Git Bash}
 
+\subsection*{Windows}
+Download from \href{https://git-scm.com/}{https://git-scm.com/}\par
+Select all of the default settings. Git Bash has also been installed and can be used instead of the command prompt. Git Bash supports UNIX commands for Git.
 
-\newpage
-
-
-
-\section{Get Git}
-Determine if you have Git installed. Type \verb|git --version| in terminal and press Enter.\par
-If \verb|Command 'git' is not found|, install with the following:
+\subsection*{Linux}
 \begin{Verbatim}
-sudo apt install git
+sudo apt-get update
+apt-get install git
 \end{Verbatim}
-
-
-\section{Configure Git}
-Specify your name:
+\subsection*{After installation}
+Check the installed version.
 \begin{Verbatim}
-git config --global user.name "James Morgan"
+git --version
 \end{Verbatim}
-Specify your email address:
+Set up your username and email address.
 \begin{Verbatim}
 git config --global user.email jamorgan75@protonmail.com
+git config --global user.name "James Morgan"
 \end{Verbatim}
 Set default branch name to ``main":
 \begin{Verbatim}
 git config --global init.default branch main
 \end{Verbatim}
+View configuration.
+\begin{Verbatim}
+git config --list
+\end{Verbatim}
+
+
+\newpage
+
 
 \section{Get help}
 Ask git for help:
@@ -117,12 +125,24 @@ This follows the format \verb|git help <command>|
 
 
 
-\section{Initialize Repository}
+\section{Start a New Project}
+\subsection*{Using Github}
+Create a new repository on \href{https://github.com/}{Github}. If you are planning on publishing this repository as the main page of your Github pages, the repository should be named\; \verb|<username>.github.io|\par
+From within Github.com, click on \verb|Code| and copy the Github URL. Navigate to the directory that the repository will be cloned to locally. Then type the following and paste the address.
+\begin{Verbatim}
+git clone <URL>
+\end{Verbatim}
+
+
+\subsection*{Local Only}
 Within terminal, change directory to the folder for which you wish to create a repository. Type the following and the press Enter:
 \begin{Verbatim}
 git init
 \end{Verbatim}
-This creates a hidden folder \verb|.git| within the directory that contains the repository files.\par
+This creates a hidden folder \verb|.git| within the directory that contains the repository files.
+
+\subsection*{Work On Your Code}
+Open your editor/IDE, create necessary files and start coding.
 
 
 
@@ -135,8 +155,8 @@ This creates a hidden folder \verb|.git| within the directory that contains the 
 
 
 
-
-\section{Git status}
+\section{Working Towards the Initial Commit}
+\subsection*{Git status}
 We can find the status of our repository with the following command:
 \begin{Verbatim}
 git status
@@ -148,7 +168,7 @@ This command will return the following information:
 \item tracked (green) or untracked (red) files
 \end{itemize}
 
-\section{Track and untrack files}
+\subsection*{Track and Untrack Files}
 To track a file:
 \begin{Verbatim}
 git add index.htm
@@ -164,7 +184,7 @@ git rm --cached notes_on_git_and_github.tex
 \end{Verbatim}
 
 
-\section{Ignore files with {\ttfamily .gitignore}}
+\subsection*{Ignore files with {\ttfamily .gitignore}}
 Create a \verb|.txt| file in the directory and add the filetype. Comment with the hashtag symbol.
 \begin{Verbatim}[frame=single]
 # ignore all .txt files
@@ -173,7 +193,7 @@ Create a \verb|.txt| file in the directory and add the filetype. Comment with th
 Ignoring files is useful if you have files with sensitive information within the directory.\par
 To see a comprehensive list of all the ways to ignore files, visit \href{https://github.com/github/gitignore}{https://github.com/github/gitignore}
 
-\section{Track all files / add to staging}
+\subsection*{Track all files / add to staging}
 To track all files within the directory, use one of the following:
 \begin{Verbatim}
 git add --all
@@ -182,10 +202,10 @@ git add .
 \end{Verbatim}
 
 
-\section{Commit}
+\subsection*{Commit}
 To commit is to take a snap shot of what your repository looks like at this point in time.
 \begin{Verbatim}
-git commit -m "first commit - committing all fules to the repository"
+git commit -m "first commit - committing all files to the repository"
 \end{Verbatim}
 
 \section{Change files and view differences}
@@ -214,6 +234,22 @@ To remove files from staging:
 git restore --staged index.htm
 \end{Verbatim}
 If we commit now, the \verb|index.htm| file will not be included as it is in the working environment.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[rounded corners,-{Stealth[length=6pt]}]
+\node[draw, align=center,minimum height = 12mm, minimum width=30mm] (working) {Working\\directory};
+\node[draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of working] (staging) {Staging\\index};
+\node[draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of staging] (local) {Local\\repository};
+\node[draw,align=center,minimum height = 12mm, minimum width=30mm,above right = 5mm and 5mm of local] (remote) {Remote\\repository};
+
+\draw (working.130) --++ (90:22mm) -| (staging.150) node[pos=.05,anchor=south west]{add};
+\draw (staging.130) --++ (90:22mm) -| (local.150) node[pos=.05,anchor=south west]{commit};
+\draw (local.130) --++ (90:22mm) -| (remote.150) node[pos=.05,anchor=south west]{push};
+
+\draw (remote.230) --++ (270:22mm) -| (local.330) node[pos=.05,anchor=south east]{pull};
+\end{tikzpicture}
+\end{figure}
 
 
 \section{Bypass staging and commit}
